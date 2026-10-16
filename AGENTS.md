@@ -1,5 +1,11 @@
 # Instructions for agents
 
+## Git commits
+
+Never create a Git commit unless the user has explicitly requested a commit.
+Do not infer permission to commit from a request to modify, fix, configure, or
+complete work. A request to push does not authorize creating a new commit.
+
 ## Commit messages
 
 Always use the [Conventional Commits](https://www.conventionalcommits.org/)
