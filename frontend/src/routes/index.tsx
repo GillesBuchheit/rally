@@ -1,29 +1,23 @@
 /* oxlint-disable react/only-export-components -- TanStack Router route modules export Route. */
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   CircleCheck,
   DatabaseZap,
-  RefreshCw,
   Route as RouteIcon,
   Smartphone,
   Sparkles,
 } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { setupQueryOptions } from '@/features/setup/setup-query'
 
 export const Route = createFileRoute('/')({
-  loader: ({ context }) => context.queryClient.ensureQueryData(setupQueryOptions),
   component: HomePage,
 })
 
@@ -51,8 +45,6 @@ const foundations = [
 ]
 
 function HomePage() {
-  const setup = useSuspenseQuery(setupQueryOptions)
-
   return (
     <main className="app-background min-h-svh px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
@@ -74,7 +66,7 @@ function HomePage() {
 
         <Separator />
 
-        <section className="grid items-end gap-8 py-6 lg:grid-cols-[1.4fr_0.6fr] lg:py-14">
+        <section className="py-6 lg:py-14">
           <div className="max-w-3xl space-y-5">
             <Badge variant="secondary">Configuration terminée</Badge>
             <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
@@ -86,32 +78,6 @@ function HomePage() {
             </p>
           </div>
 
-          <Card className="bg-card/80 shadow-xl shadow-slate-950/5 backdrop-blur-sm">
-            <CardHeader>
-              <CardDescription>État de l’application</CardDescription>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <span className="size-2.5 rounded-full bg-emerald-500" />
-                Opérationnelle
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm leading-6 text-muted-foreground">
-                Vérifié à {new Date(setup.data.checkedAt).toLocaleTimeString('fr-FR')}.
-              </p>
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => void setup.refetch()}
-                disabled={setup.isFetching}
-              >
-                <RefreshCw
-                  data-icon="inline-start"
-                  className={setup.isFetching ? 'animate-spin' : undefined}
-                />
-                Vérifier la configuration
-              </Button>
-            </CardContent>
-          </Card>
         </section>
 
         <section aria-labelledby="foundations-title" className="space-y-4">
