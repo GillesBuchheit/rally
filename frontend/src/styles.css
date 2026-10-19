@@ -1,85 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  font-family: "Geist Variable", system-ui, sans-serif;
   color-scheme: light;
+
+  /*
+   * Primitive tokens
+   * Raw brand values from the Rally identity.
+   * Components should consume the semantic tokens below, not these directly.
+   */
+  --brand-navy: #0b2d5b;
+  --brand-orange: #ff7a00;
+  --brand-orange-strong: #e05a00;
+  --brand-green: #2e7d32;
+  --brand-sky: #6cc9ff;
+  --brand-cream: #f8f5ec;
+  --neutral-white: #ffffff;
+
+  /*
+   * Semantic tokens
+   * These follow the shadcn contract and can be remapped without changing
+   * component variants.
+   */
   --radius: 0.75rem;
-  --background: oklch(0.985 0.004 247.858);
-  --foreground: oklch(0.208 0.042 265.755);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.208 0.042 265.755);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.208 0.042 265.755);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.954 0.038 75.164);
-  --accent-foreground: oklch(0.279 0.041 260.031);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --background: var(--brand-cream);
+  --foreground: var(--brand-navy);
+  --card: var(--neutral-white);
+  --card-foreground: var(--brand-navy);
+  --popover: var(--neutral-white);
+  --popover-foreground: var(--brand-navy);
+  --primary: var(--brand-orange);
+  --primary-foreground: var(--neutral-white);
+  --secondary: color-mix(in srgb, var(--brand-sky) 28%, var(--neutral-white));
+  --secondary-foreground: var(--brand-navy);
+  --muted: color-mix(in srgb, var(--brand-navy) 7%, var(--brand-cream));
+  --muted-foreground: color-mix(in srgb, var(--brand-navy) 65%, var(--brand-cream));
+  --accent: color-mix(in srgb, var(--brand-green) 12%, var(--neutral-white));
+  --accent-foreground: var(--brand-green);
+  --destructive: #dc2626;
+  --border: color-mix(in srgb, var(--brand-navy) 14%, var(--brand-cream));
+  --input: color-mix(in srgb, var(--brand-navy) 14%, var(--brand-cream));
+  --ring: var(--brand-orange);
+
+  /* Generic feedback tokens used by semantic component variants. */
+  --success: var(--brand-green);
+  --success-foreground: var(--neutral-white);
+  --info: var(--brand-sky);
+  --info-foreground: var(--brand-navy);
+  --warning: var(--brand-orange);
+  --warning-foreground: var(--brand-orange-strong);
+
+  --chart-1: var(--brand-orange);
+  --chart-2: var(--brand-green);
+  --chart-3: var(--brand-sky);
+  --chart-4: var(--brand-orange-strong);
+  --chart-5: var(--brand-navy);
+
+  --sidebar: var(--neutral-white);
+  --sidebar-foreground: var(--brand-navy);
+  --sidebar-primary: var(--brand-orange);
+  --sidebar-primary-foreground: var(--neutral-white);
+  --sidebar-accent: color-mix(in srgb, var(--brand-sky) 28%, var(--neutral-white));
+  --sidebar-accent-foreground: var(--brand-navy);
+  --sidebar-border: color-mix(in srgb, var(--brand-navy) 14%, var(--brand-cream));
+  --sidebar-ring: var(--brand-orange);
 }
 
 .dark {
   color-scheme: dark;
-  --background: oklch(0.145 0.028 261.692);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.32 0.055 64.26);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: #071d3b;
+  --foreground: var(--brand-cream);
+  --card: var(--brand-navy);
+  --card-foreground: var(--brand-cream);
+  --popover: var(--brand-navy);
+  --popover-foreground: var(--brand-cream);
+  --primary: var(--brand-orange);
+  --primary-foreground: var(--neutral-white);
+  --secondary: color-mix(in srgb, var(--brand-sky) 20%, var(--brand-navy));
+  --secondary-foreground: var(--brand-cream);
+  --muted: color-mix(in srgb, var(--neutral-white) 10%, var(--brand-navy));
+  --muted-foreground: color-mix(in srgb, var(--neutral-white) 70%, var(--brand-navy));
+  --accent: color-mix(in srgb, var(--brand-green) 42%, var(--brand-navy));
+  --accent-foreground: var(--brand-cream);
+  --destructive: #f87171;
+  --border: rgb(255 255 255 / 12%);
+  --input: rgb(255 255 255 / 16%);
+  --ring: var(--brand-orange);
+  --success: #5cbf62;
+  --success-foreground: #071d3b;
+  --info: var(--brand-sky);
+  --info-foreground: #071d3b;
+  --warning: #ff9d42;
+  --warning-foreground: #071d3b;
+  --sidebar: var(--brand-navy);
+  --sidebar-foreground: var(--brand-cream);
+  --sidebar-primary: var(--brand-orange);
+  --sidebar-primary-foreground: var(--neutral-white);
+  --sidebar-accent: color-mix(in srgb, var(--brand-sky) 20%, var(--brand-navy));
+  --sidebar-accent-foreground: var(--brand-cream);
+  --sidebar-border: rgb(255 255 255 / 12%);
+  --sidebar-ring: var(--brand-orange);
 }
 
 @theme inline {
-  --font-sans: "Geist Variable", system-ui, sans-serif;
-  --font-heading: "Geist Variable", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Poppins", "Inter", system-ui, sans-serif;
+
+  /* Primitive palette utilities for exceptional brand-only artwork. */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-strong: var(--brand-orange-strong);
+  --color-brand-green: var(--brand-green);
+  --color-brand-sky: var(--brand-sky);
+  --color-brand-cream: var(--brand-cream);
+
+  /* shadcn semantic color contract. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -98,6 +137,12 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -111,6 +156,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -127,9 +173,16 @@
   }
 
   body {
-    @apply min-w-80 bg-background text-foreground;
+    @apply min-w-80 bg-background font-sans text-foreground;
     margin: 0;
     min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
   }
 
   button,
@@ -141,7 +194,7 @@
 @layer utilities {
   .app-background {
     background-image:
-      radial-gradient(circle at 8% 12%, oklch(0.82 0.12 70 / 18%), transparent 28rem),
-      radial-gradient(circle at 88% 28%, oklch(0.75 0.08 245 / 14%), transparent 30rem);
+      radial-gradient(circle at 8% 12%, color-mix(in srgb, var(--brand-orange) 18%, transparent), transparent 28rem),
+      radial-gradient(circle at 88% 28%, color-mix(in srgb, var(--brand-sky) 18%, transparent), transparent 30rem);
   }
 }
