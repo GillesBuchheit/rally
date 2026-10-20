@@ -7,19 +7,19 @@ import jakarta.persistence.EntityManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@RequiredArgsConstructor
 class JpaRegistrationRepository implements RegistrationRepository {
 
+    @NonNull
     private final SpringDataRegistrationRepository repository;
+    @NonNull
     private final EntityManager entityManager;
-
-    JpaRegistrationRepository(SpringDataRegistrationRepository repository, EntityManager entityManager) {
-        this.repository = repository;
-        this.entityManager = entityManager;
-    }
 
     @Override
     public boolean exists(UUID leagueId, UUID playerId) {

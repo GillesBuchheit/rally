@@ -8,27 +8,25 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import static fr.rally.competition.application.CompetitionException.Code.*;
 
+@RequiredArgsConstructor
 public final class CompetitionService {
 
+    @NonNull
     private final LeagueRepository leagues;
+    @NonNull
     private final PlayerRepository players;
+    @NonNull
     private final RegistrationRepository registrations;
+    @NonNull
     private final Clock clock;
 
-    public CompetitionService(LeagueRepository leagues, PlayerRepository players,
-                              RegistrationRepository registrations, Clock clock) {
-        this.leagues = Objects.requireNonNull(leagues);
-        this.players = Objects.requireNonNull(players);
-        this.registrations = Objects.requireNonNull(registrations);
-        this.clock = Objects.requireNonNull(clock);
-    }
-
-    public League createLeague(String name, Sport sport, UUID ownerId) {
+    public League createLeague(String name, @NonNull Sport sport, @NonNull UUID ownerId) {
         return leagues.save(League.create(name, sport, ownerId));
     }
 
@@ -36,7 +34,10 @@ public final class CompetitionService {
         return players.save(Player.create(displayName));
     }
 
-    public Registration registerPlayer(UUID leagueId, UUID playerId, UUID actorId) {
+    public Registration registerPlayer(
+            @NonNull UUID leagueId,
+            @NonNull UUID playerId,
+            @NonNull UUID actorId) {
         requireOwner(leagueId, actorId);
         players.findById(playerId).orElseThrow(() -> new CompetitionException(PLAYER_NOT_FOUND));
         if (registrations.exists(leagueId, playerId)) {
@@ -47,14 +48,17 @@ public final class CompetitionService {
         return registration;
     }
 
-    public void removePlayer(UUID leagueId, UUID playerId, UUID actorId) {
+    public void removePlayer(
+            @NonNull UUID leagueId,
+            @NonNull UUID playerId,
+            @NonNull UUID actorId) {
         requireOwner(leagueId, actorId);
         if (!registrations.delete(leagueId, playerId)) {
             throw new CompetitionException(PLAYER_NOT_REGISTERED);
         }
     }
 
-    public List<Player> listPlayers(UUID leagueId) {
+    public List<Player> listPlayers(@NonNull UUID leagueId) {
         requireLeague(leagueId);
         return registrations.findByLeagueId(leagueId).stream()
                 .map(registration -> players.findById(registration.playerId())
@@ -64,7 +68,6 @@ public final class CompetitionService {
     }
 
     private void requireOwner(UUID leagueId, UUID actorId) {
-        Objects.requireNonNull(actorId, "Actor id is required");
         if (!requireLeague(leagueId).ownerId().equals(actorId)) {
             throw new CompetitionException(NOT_LEAGUE_OWNER);
         }

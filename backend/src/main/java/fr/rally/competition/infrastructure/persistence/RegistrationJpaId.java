@@ -3,48 +3,26 @@ package fr.rally.competition.infrastructure.persistence;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.UUID;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Embeddable
+@Getter(AccessLevel.PACKAGE)
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class RegistrationJpaId implements Serializable {
 
+    @NonNull
     @Column(name = "league_id", nullable = false)
     private UUID leagueId;
 
+    @NonNull
     @Column(name = "player_id", nullable = false)
     private UUID playerId;
-
-    protected RegistrationJpaId() {
-    }
-
-    RegistrationJpaId(UUID leagueId, UUID playerId) {
-        this.leagueId = leagueId;
-        this.playerId = playerId;
-    }
-
-    UUID getLeagueId() {
-        return leagueId;
-    }
-
-    UUID getPlayerId() {
-        return playerId;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (!(other instanceof RegistrationJpaId that)) {
-            return false;
-        }
-        return Objects.equals(leagueId, that.leagueId)
-                && Objects.equals(playerId, that.playerId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(leagueId, playerId);
-    }
 }

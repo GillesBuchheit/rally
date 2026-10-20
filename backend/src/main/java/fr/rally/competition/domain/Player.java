@@ -1,12 +1,11 @@
 package fr.rally.competition.domain;
 
-import java.util.Objects;
 import java.util.UUID;
+import lombok.NonNull;
 
-public record Player(UUID id, String displayName) {
+public record Player(@NonNull UUID id, String displayName) {
 
     public Player {
-        Objects.requireNonNull(id, "Player id is required");
         if (displayName == null || displayName.isBlank()) {
             throw new IllegalArgumentException("Player name is required");
         }

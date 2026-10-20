@@ -4,16 +4,16 @@ import fr.rally.competition.application.LeagueRepository;
 import fr.rally.competition.domain.League;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 class JpaLeagueRepository implements LeagueRepository {
 
+    @NonNull
     private final SpringDataLeagueRepository repository;
-
-    JpaLeagueRepository(SpringDataLeagueRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public League save(League league) {

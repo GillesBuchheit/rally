@@ -1,18 +1,15 @@
 package fr.rally.competition.domain;
 
-import java.util.Objects;
 import java.util.UUID;
+import lombok.NonNull;
 
-public record League(UUID id, String name, Sport sport, UUID ownerId) {
+public record League(@NonNull UUID id, String name, @NonNull Sport sport, @NonNull UUID ownerId) {
 
     public League {
-        Objects.requireNonNull(id, "League id is required");
-        Objects.requireNonNull(sport, "Sport is required");
-        Objects.requireNonNull(ownerId, "Owner id is required");
         name = normalizeName(name);
     }
 
-    public static League create(String name, Sport sport, UUID ownerId) {
+    public static League create(String name, @NonNull Sport sport, @NonNull UUID ownerId) {
         return new League(UUID.randomUUID(), name, sport, ownerId);
     }
 

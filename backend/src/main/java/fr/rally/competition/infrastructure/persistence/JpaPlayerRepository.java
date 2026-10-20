@@ -4,16 +4,16 @@ import fr.rally.competition.application.PlayerRepository;
 import fr.rally.competition.domain.Player;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 class JpaPlayerRepository implements PlayerRepository {
 
+    @NonNull
     private final SpringDataPlayerRepository repository;
-
-    JpaPlayerRepository(SpringDataPlayerRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public Player save(Player player) {
